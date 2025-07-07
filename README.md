@@ -1,10 +1,10 @@
 # Infraestructura como codigo y orquestacion de microservicios
 
 ## Curso : Desarrollo de Software
+
 ## Autor : Diego Alesxander Orrego Torrejon
+
 ## Codigo : 20204161G
-
-
 
 ! Se avanzo hasta la pregunta 3 para avanzar lo que podia acabar mas facilmente
 
@@ -29,9 +29,10 @@ Donde en `product-service` se creo un microservicio de gestion de productos que 
 
 Estos a su ves presentan un `Dockerfile` con `multi-stage build` en el que primero se inicializa las dependencias necesarias y despues se copia solo los archivos necesarios en el segundo stage para correr el programa, esto puede evidenciarse mejor en otros lenguajes en los que se necesita compilar los archivos asi simplemente tendriamos que copiar los binarios compilados y dejar mas libre el runtime image
 
-Despues de haber definido todo esto para los servicion lo que hacemos a continuacion es la orquestacion mediante `Docker-compose`  el cual conectara ambos servicios en una sola red interna y les permitira compartir el volumen simulado.
+Despues de haber definido todo esto para los servicion lo que hacemos a continuacion es la orquestacion mediante `Docker-compose` el cual conectara ambos servicios en una sola red interna y les permitira compartir el volumen simulado.
 
 Para poder tener una sola red interna lo que hacemos es definir una red la cual compartiran mediante la siguiente declaracion:
+
 ```bash
 networks:
   app-network:
@@ -71,6 +72,7 @@ chmod +x ./pregunta-3/stop.sh
 # Pregunta 4 Kubernetes y Orquestacion
 
 Estructura del proyecto
+
 ```bash
 |-pregunta-4
 |   |-k8s
@@ -105,7 +107,7 @@ pregunta-4\deploy.sh
 
 Lo que hace este script es lo siguiente
 
-Inicia minicube configura como entorno docker despues buildea las imagenes de los servicios y la base de datos  luego aplica los manifiestos sobre el cluster de minikube y espera a que los deployments esten terminados para seguir, despues lo que hace es recuperar los pods para verificar los estados y revisa los logs de `prodcut-service` y `user-service` despues configura un `port-forward` en los puestos `8000` para `user-service` y `8001` para `product-service` para poder hacer la llamada haciendola desde el localhost.
+Inicia minicube configura como entorno docker despues buildea las imagenes de los servicios y la base de datos luego aplica los manifiestos sobre el cluster de minikube y espera a que los deployments esten terminados para seguir, despues lo que hace es recuperar los pods para verificar los estados y revisa los logs de `prodcut-service` y `user-service` despues configura un `port-forward` en los puestos `8000` para `user-service` y `8001` para `product-service` para poder hacer la llamada haciendola desde el localhost.
 
 ```
 #!/usr/bin/env bash
@@ -183,3 +185,28 @@ pregunta-4\cleanup.sh
 ```
 
 El log que nos da al ejecutar se guardara en `preagunta-4/logs.txt` para verificar como es que se realiza la ejecucion y deployment asi como al final nos mostrara en que puertos podemos probar para hacer uso de los servicios
+
+# GitHub Actions para CI/CD
+
+Se han creado GitHub Actions minimalistas para automatizar las pruebas de ambas preguntas:
+
+## Pregunta 3 - Docker Compose CI
+
+- **Archivo**: `.github/workflows/pregunta3-docker-deploy.yml`
+- **Trigger**: Push/PR a archivos en `pregunta-3/`
+- **Funcionalidad**:
+  - Ejecuta el script `deploy.sh`
+  - Prueba conectividad usando endpoints `/health`
+  - Limpia recursos automáticamente
+
+## Pregunta 4 - Kubernetes CI
+
+- **Archivo**: `.github/workflows/pregunta4-k8s-deploy.yml`
+- **Trigger**: Push/PR a archivos en `pregunta-4/`
+- **Funcionalidad**:
+  - Configura Minikube automáticamente
+  - Ejecuta el script `deploy.sh`
+  - Verifica conectividad de servicios
+  - Limpia recursos y clusters
+
+Ambos workflows son minimalistas y usan los scripts existentes para mantener consistencia entre el desarrollo local y CI/CD. servicios

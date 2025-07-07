@@ -1,0 +1,62 @@
+name: Pregunta 3
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pregunta-3/**"
+      - ".github/workflows/pregunta3-docker-deploy.yml"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "pregunta-3/**"
+
+jobs:
+  docker-compose-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Make deploy script executable
+        run: chmod +x pregunta-3/deploy.sh
+
+      - name: Build and start services
+        run: |
+          cd pregunta-3
+          docker compose up --build -d || docker-compose up --build -d
+
+      - name: Wait for services to be ready
+        run: |
+          echo "Waiting for services to start..."
+          sleep 15
+          docker compose -f pregunta-3/Docker-compose.yaml ps || docker-compose -f pregunta-3/Docker-compose.yaml ps
+
+      - name: Test services connectivity
+        run: |
+          echo "Testing user service health..."
+          curl -f http://localhost:8000/health || exit 1
+
+          echo "Testing product service health..."
+          curl -f http://localhost:8001/health || exit 1
+
+          echo "Services are responding correctly!"
+
+      - name: Show service logs
+        if: always()
+        run: |
+          echo "=== User Service Logs ==="
+          docker compose -f pregunta-3/Docker-compose.yaml logs user-service || docker-compose -f pregunta-3/Docker-compose.yaml logs user-service
+          echo "=== Product Service Logs ==="
+          docker compose -f pregunta-3/Docker-compose.yaml logs product-service || docker-compose -f pregunta-3/Docker-compose.yaml logs product-service
+
+      - name: Cleanup
+        if: always()
+        run: |
+          cd pregunta-3
+          docker compose down --volumes --remove-orphans
+          docker system prune -f
