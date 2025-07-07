@@ -21,6 +21,14 @@ def create_user(user: User):
     users[user.id] = user.dict()
     return user
 
+@app.get("/users/", response_model=Dict[int, User])
+def list_users():
+    # Verifica si hay usuarios en la "base de datos"
+    if not users:
+        raise HTTPException(status_code=404, detail="No users found")
+    # Devuelve la lista de usuarios
+    return list(users.values())
+
 @app.get("/users/{user_id}", response_model=User)
 def get_user(user_id: int):
     # Comprueba si el usuario existe
