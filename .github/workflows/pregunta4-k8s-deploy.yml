@@ -1,0 +1,48 @@
+name: Pregunta 4
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "pregunta-4/**"
+      - ".github/workflows/pregunta4-k8s-deploy.yml"
+  pull_request:
+    branches: [main, master]
+    paths:
+      - "pregunta-4/**"
+
+jobs:
+  kubernetes-deploy-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Minikube
+        uses: medyagh/setup-minikube@master
+        with:
+          minikube-version: "latest"
+          driver: "docker"
+
+      - name: Make deploy script executable
+        run: chmod +x pregunta-4/deploy.sh
+
+      - name: Verify deploy
+        run: ./pregunta-4/deploy.sh
+
+      - name: Verify status with kubectl
+        run: kubectl get pods --all-namespaces
+
+      - name: Verify Service
+        run: |
+          sleep 5  # Esperar un poco más para que port-forward esté listo
+          curl http://localhost:8000/health || exit 1
+          curl http://localhost:8001/health || exit 1
+
+      - name: Cleanup
+        if: always()
+        run: |
+          pkill -f "kubectl port-forward" 2>/dev/null || true
+          kubectl delete -f pregunta-4/k8s/ --ignore-not-found=true
+          minikube delete || true
