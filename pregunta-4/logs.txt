@@ -1,0 +1,372 @@
+Desplegando servicios
+* minikube v1.36.0 on Debian 12.11 (amd64)
+* Using the docker driver based on user configuration
+* Using Docker driver with root privileges
+! For an improved experience it's recommended to use Docker Engine instead of Docker Desktop.
+Docker Engine installation instructions: https://docs.docker.com/engine/install/#server
+* Starting "minikube" primary control-plane node in "minikube" cluster
+* Pulling base image v0.0.47 ...
+* Creating docker container (CPUs=2, Memory=2200MB) ...
+* Preparing Kubernetes v1.33.1 on Docker 28.1.1 ...
+  - Generating certificates and keys ...
+  - Booting up control plane ...
+  - Configuring RBAC rules ...
+* Configuring bridge CNI (Container Networking Interface) ...
+* Verifying Kubernetes components...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: storage-provisioner, default-storageclass
+
+! /usr/local/bin/kubectl is version 1.31.4, which may have incompatibilities with Kubernetes 1.33.1.
+  - Want kubectl v1.33.1? Try 'minikube kubectl -- get pods -A'
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+Building Docker imagesÑ
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 214B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/postgres:15
+#2 DONE 2.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B 0.0s done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 798B 0.0s done
+#4 DONE 0.0s
+
+#5 [1/2] FROM docker.io/library/postgres:15@sha256:3156e13d976072c9083fe4c56455b8515dcf6fee23fd770e6ba4a3c6b8837337
+#5 resolve docker.io/library/postgres:15@sha256:3156e13d976072c9083fe4c56455b8515dcf6fee23fd770e6ba4a3c6b8837337 0.0s done
+#5 sha256:3156e13d976072c9083fe4c56455b8515dcf6fee23fd770e6ba4a3c6b8837337 10.27kB / 10.27kB done
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 0B / 28.23MB 0.1s
+#5 sha256:e90c7a6a1f6c3b02d4de4f37ca9576b5bc126358b8011ab226bd8ce93e9ea7f3 3.63kB / 3.63kB done
+#5 sha256:788460ffe09b638c9cabb75a1827c63f6131491c62ca47d05c1e895fae805c55 0B / 1.17kB 0.1s
+#5 sha256:8a730fef06f525cfb9604a84bbcb764b81132d62e77ca2688648a5b3565ad05d 0B / 4.53MB 0.1s
+#5 sha256:68f788e38c163918a165c335298a4cd4b49c9c5b04cc6fac113972828ea08272 9.89kB / 9.89kB done
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 3.15MB / 28.23MB 0.8s
+#5 sha256:788460ffe09b638c9cabb75a1827c63f6131491c62ca47d05c1e895fae805c55 1.17kB / 1.17kB 0.7s done
+#5 sha256:73982858624ff24d9026ee85736cf8dc20a32b626295291321c9e62cf8fce061 0B / 1.45MB 0.8s
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 6.29MB / 28.23MB 1.0s
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 9.44MB / 28.23MB 1.2s
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 14.68MB / 28.23MB 1.5s
+#5 sha256:8a730fef06f525cfb9604a84bbcb764b81132d62e77ca2688648a5b3565ad05d 1.05MB / 4.53MB 1.5s
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 16.78MB / 28.23MB 1.7s
+#5 sha256:8a730fef06f525cfb9604a84bbcb764b81132d62e77ca2688648a5b3565ad05d 2.10MB / 4.53MB 1.7s
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 18.87MB / 28.23MB 1.8s
+#5 sha256:73982858624ff24d9026ee85736cf8dc20a32b626295291321c9e62cf8fce061 1.05MB / 1.45MB 1.8s
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 25.17MB / 28.23MB 2.0s
+#5 sha256:8a730fef06f525cfb9604a84bbcb764b81132d62e77ca2688648a5b3565ad05d 4.19MB / 4.53MB 2.0s
+#5 sha256:73982858624ff24d9026ee85736cf8dc20a32b626295291321c9e62cf8fce061 1.45MB / 1.45MB 1.9s done
+#5 sha256:4f48d560b497bbad0b5fab005e1169b7883927a48364a2abad52649515b4f20d 0B / 8.07MB 2.0s
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 27.26MB / 28.23MB 2.1s
+#5 sha256:8a730fef06f525cfb9604a84bbcb764b81132d62e77ca2688648a5b3565ad05d 4.53MB / 4.53MB 2.0s done
+#5 sha256:f5e64e6b34af8da15a041cd131c2cf0699c28b8146f20ebc1ee0efb9dedc469d 0B / 1.20MB 2.1s
+#5 extracting sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d
+#5 sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 28.23MB / 28.23MB 2.1s done
+#5 sha256:44abe0f92dbfc13cf792866d13c25db256f75a592ccb5a872c978c9ca0aeeb11 0B / 116B 2.3s
+#5 sha256:44abe0f92dbfc13cf792866d13c25db256f75a592ccb5a872c978c9ca0aeeb11 116B / 116B 2.4s done
+#5 sha256:d53d7d6905191bb072569d44107341fd5b3ad6ed69530cb886fc8f4f4517dbda 0B / 3.14kB 2.4s
+#5 sha256:4f48d560b497bbad0b5fab005e1169b7883927a48364a2abad52649515b4f20d 4.19MB / 8.07MB 2.6s
+#5 sha256:f5e64e6b34af8da15a041cd131c2cf0699c28b8146f20ebc1ee0efb9dedc469d 1.20MB / 1.20MB 2.4s done
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 0B / 109.68MB 2.6s
+#5 sha256:4f48d560b497bbad0b5fab005e1169b7883927a48364a2abad52649515b4f20d 7.34MB / 8.07MB 2.6s
+#5 sha256:4f48d560b497bbad0b5fab005e1169b7883927a48364a2abad52649515b4f20d 8.07MB / 8.07MB 2.7s done
+#5 sha256:d53d7d6905191bb072569d44107341fd5b3ad6ed69530cb886fc8f4f4517dbda 3.14kB / 3.14kB 2.7s done
+#5 sha256:5db06049d840c18972f9314eb04050ecb3b3002fe6e6df8d25d4a8cc68a47b99 0B / 128B 2.7s
+#5 sha256:536a9d2ffc4ef097ae0265a13ce6498fb2c7c25ffe17a246ab8542e9ec10fc72 0B / 9.77kB 2.7s
+#5 sha256:5db06049d840c18972f9314eb04050ecb3b3002fe6e6df8d25d4a8cc68a47b99 128B / 128B 3.0s done
+#5 sha256:536a9d2ffc4ef097ae0265a13ce6498fb2c7c25ffe17a246ab8542e9ec10fc72 9.77kB / 9.77kB 2.9s done
+#5 sha256:3da712d556208ccfe3f879144870c423ddd5d6dff4d900cc8cc28deee943910d 0B / 5.93kB 3.0s
+#5 sha256:bfe3546ddf17311145f8f3a182f8116de94fc381baa5cfcd9757135d71c724d2 0B / 166B 3.0s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 7.34MB / 109.68MB 3.1s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 13.99MB / 109.68MB 3.5s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 19.92MB / 109.68MB 3.7s
+#5 sha256:3da712d556208ccfe3f879144870c423ddd5d6dff4d900cc8cc28deee943910d 5.93kB / 5.93kB 3.6s done
+#5 sha256:bfe3546ddf17311145f8f3a182f8116de94fc381baa5cfcd9757135d71c724d2 166B / 166B 3.6s done
+#5 sha256:1a3f3693f90fdaa52d62ebc81eb1dcd851e1f69e2935904dd9173cad334621a4 0B / 185B 3.7s
+#5 sha256:1a3f3693f90fdaa52d62ebc81eb1dcd851e1f69e2935904dd9173cad334621a4 185B / 185B 3.9s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 34.60MB / 109.68MB 4.1s
+#5 sha256:1a3f3693f90fdaa52d62ebc81eb1dcd851e1f69e2935904dd9173cad334621a4 185B / 185B 3.9s done
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 41.83MB / 109.68MB 4.3s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 51.38MB / 109.68MB 4.6s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 62.14MB / 109.68MB 5.0s
+#5 extracting sha256:3da95a905ed546f99c4564407923a681757d89651a388ec3f1f5e9bf5ed0b39d 2.9s done
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 69.21MB / 109.68MB 5.2s
+#5 extracting sha256:788460ffe09b638c9cabb75a1827c63f6131491c62ca47d05c1e895fae805c55 done
+#5 extracting sha256:8a730fef06f525cfb9604a84bbcb764b81132d62e77ca2688648a5b3565ad05d 0.1s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 76.55MB / 109.68MB 5.4s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 83.49MB / 109.68MB 5.6s
+#5 extracting sha256:8a730fef06f525cfb9604a84bbcb764b81132d62e77ca2688648a5b3565ad05d 0.3s done
+#5 extracting sha256:73982858624ff24d9026ee85736cf8dc20a32b626295291321c9e62cf8fce061 0.1s done
+#5 extracting sha256:4f48d560b497bbad0b5fab005e1169b7883927a48364a2abad52649515b4f20d
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 90.18MB / 109.68MB 5.8s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 97.52MB / 109.68MB 6.0s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 103.81MB / 109.68MB 6.2s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 109.68MB / 109.68MB 6.4s
+#5 sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 109.68MB / 109.68MB 6.4s done
+#5 extracting sha256:4f48d560b497bbad0b5fab005e1169b7883927a48364a2abad52649515b4f20d 0.8s done
+#5 extracting sha256:f5e64e6b34af8da15a041cd131c2cf0699c28b8146f20ebc1ee0efb9dedc469d 0.1s done
+#5 extracting sha256:44abe0f92dbfc13cf792866d13c25db256f75a592ccb5a872c978c9ca0aeeb11 done
+#5 extracting sha256:d53d7d6905191bb072569d44107341fd5b3ad6ed69530cb886fc8f4f4517dbda done
+#5 extracting sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa
+#5 extracting sha256:f8575ed0701b0f8e4764dd3f375b12b272d204b54ac9919ff886c006c97a14aa 5.0s done
+#5 extracting sha256:536a9d2ffc4ef097ae0265a13ce6498fb2c7c25ffe17a246ab8542e9ec10fc72
+#5 extracting sha256:536a9d2ffc4ef097ae0265a13ce6498fb2c7c25ffe17a246ab8542e9ec10fc72 done
+#5 extracting sha256:5db06049d840c18972f9314eb04050ecb3b3002fe6e6df8d25d4a8cc68a47b99 done
+#5 extracting sha256:bfe3546ddf17311145f8f3a182f8116de94fc381baa5cfcd9757135d71c724d2 done
+#5 extracting sha256:3da712d556208ccfe3f879144870c423ddd5d6dff4d900cc8cc28deee943910d done
+#5 extracting sha256:1a3f3693f90fdaa52d62ebc81eb1dcd851e1f69e2935904dd9173cad334621a4 done
+#5 DONE 12.2s
+
+#6 [2/2] COPY init.sql /docker-entrypoint-initdb.d/01-init.sql
+#6 DONE 0.5s
+
+#7 exporting to image
+#7 exporting layers 0.0s done
+#7 writing image sha256:1bce3d4f850a506abd5b14b7762e23aee714449ec795873819375261eb278929 done
+#7 naming to docker.io/library/postgres-custom:latest done
+#7 DONE 0.0s
+
+ [33m1 warning found (use docker --debug to expand):
+[0m - SecretsUsedInArgOrEnv: Do not use ARG or ENV instructions for sensitive data (ENV "POSTGRES_PASSWORD") (line 5)
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 422B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.10-slim
+#2 DONE 1.8s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 2.90kB 0.0s done
+#4 DONE 0.0s
+
+#5 [build 1/4] FROM docker.io/library/python:3.10-slim@sha256:9dd6774a1276178f94b0cc1fb1f0edd980825d0ea7634847af9940b1b6273c13
+#5 resolve docker.io/library/python:3.10-slim@sha256:9dd6774a1276178f94b0cc1fb1f0edd980825d0ea7634847af9940b1b6273c13 0.0s done
+#5 sha256:64b78282ca88b226c404cb8dfdee72b75eea52c9ac7380c0439b6e03992e483f 0B / 248B 0.1s
+#5 sha256:9dd6774a1276178f94b0cc1fb1f0edd980825d0ea7634847af9940b1b6273c13 9.13kB / 9.13kB done
+#5 sha256:c5dbd5ba857839a0aa9db765ea519c1514a40da811b4cf08c852b72fab4379d5 1.75kB / 1.75kB done
+#5 sha256:563dffbdc42507a70677ee28b4bb678ad9074e3c9f75e3043523a38dcdf4f553 5.37kB / 5.37kB done
+#5 sha256:0ebcc011f0ec7a9a900f7366b104730396a59032e64f04f3867a75f25ed48280 0B / 3.51MB 0.1s
+#5 sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 0B / 15.65MB 0.1s
+#5 sha256:64b78282ca88b226c404cb8dfdee72b75eea52c9ac7380c0439b6e03992e483f 248B / 248B 0.8s done
+#5 sha256:0ebcc011f0ec7a9a900f7366b104730396a59032e64f04f3867a75f25ed48280 2.10MB / 3.51MB 0.8s
+#5 sha256:0ebcc011f0ec7a9a900f7366b104730396a59032e64f04f3867a75f25ed48280 3.51MB / 3.51MB 0.9s done
+#5 extracting sha256:0ebcc011f0ec7a9a900f7366b104730396a59032e64f04f3867a75f25ed48280 0.1s
+#5 sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 1.05MB / 15.65MB 1.0s
+#5 sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 5.24MB / 15.65MB 1.2s
+#5 extracting sha256:0ebcc011f0ec7a9a900f7366b104730396a59032e64f04f3867a75f25ed48280 0.2s done
+#5 sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 8.39MB / 15.65MB 1.3s
+#5 sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 11.53MB / 15.65MB 1.4s
+#5 sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 14.68MB / 15.65MB 1.6s
+#5 sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 15.65MB / 15.65MB 1.7s done
+#5 extracting sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 0.1s
+#5 extracting sha256:92d63ec5cbeb1348bad42929919fd8e78f38d96e388b5509d2929d76ddafb48e 1.1s done
+#5 extracting sha256:64b78282ca88b226c404cb8dfdee72b75eea52c9ac7380c0439b6e03992e483f done
+#5 DONE 2.9s
+
+#6 [build 2/4] WORKDIR /app
+#6 DONE 0.2s
+
+#7 [build 3/4] COPY requirements.txt .
+#7 DONE 0.0s
+
+#8 [build 4/4] RUN pip install --no-cache-dir --user -r requirements.txt
+#8 1.875 Collecting fastapi
+#8 1.941   Downloading fastapi-0.116.0-py3-none-any.whl (95 kB)
+#8 1.964      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 95.6/95.6 kB 4.4 MB/s eta 0:00:00
+#8 2.017 Collecting uvicorn
+#8 2.032   Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
+#8 2.036      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.4/66.4 kB 184.2 MB/s eta 0:00:00
+#8 2.342 Collecting pydantic
+#8 2.363   Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
+#8 2.398      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 444.8/444.8 kB 13.8 MB/s eta 0:00:00
+#8 2.562 Collecting psycopg2-binary
+#8 2.583   Downloading psycopg2_binary-2.9.10-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
+#8 2.723      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 22.0 MB/s eta 0:00:00
+#8 2.841 Collecting typing-extensions>=4.8.0
+#8 2.862   Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+#8 2.876      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.9/43.9 kB 3.1 MB/s eta 0:00:00
+#8 2.939 Collecting starlette<0.47.0,>=0.40.0
+#8 2.952   Downloading starlette-0.46.2-py3-none-any.whl (72 kB)
+#8 2.957      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.0/72.0 kB 68.6 MB/s eta 0:00:00
+#8 3.017 Collecting h11>=0.8
+#8 3.034   Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#8 3.070 Collecting click>=7.0
+#8 3.089   Downloading click-8.2.1-py3-none-any.whl (102 kB)
+#8 3.097      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 18.7 MB/s eta 0:00:00
+#8 3.131 Collecting typing-inspection>=0.4.0
+#8 3.151   Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+#8 3.174 Collecting annotated-types>=0.6.0
+#8 3.220   Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+#8 4.847 Collecting pydantic-core==2.33.2
+#8 4.864   Downloading pydantic_core-2.33.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+#8 4.978      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 18.2 MB/s eta 0:00:00
+#8 5.048 Collecting anyio<5,>=3.6.2
+#8 5.074   Downloading anyio-4.9.0-py3-none-any.whl (100 kB)
+#8 5.079      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.9/100.9 kB 58.5 MB/s eta 0:00:00
+#8 5.141 Collecting exceptiongroup>=1.0.2
+#8 5.164   Downloading exceptiongroup-1.3.0-py3-none-any.whl (16 kB)
+#8 5.191 Collecting idna>=2.8
+#8 5.202   Downloading idna-3.10-py3-none-any.whl (70 kB)
+#8 5.209      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 13.1 MB/s eta 0:00:00
+#8 5.230 Collecting sniffio>=1.1
+#8 5.250   Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+#8 5.368 Installing collected packages: typing-extensions, sniffio, psycopg2-binary, idna, h11, click, annotated-types, uvicorn, typing-inspection, pydantic-core, exceptiongroup, pydantic, anyio, starlette, fastapi
+#8 5.737   WARNING: The script uvicorn is installed in '/root/.local/bin' which is not on PATH.
+#8 5.737   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+#8 6.314   WARNING: The script fastapi is installed in '/root/.local/bin' which is not on PATH.
+#8 6.314   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+#8 6.324 Successfully installed annotated-types-0.7.0 anyio-4.9.0 click-8.2.1 exceptiongroup-1.3.0 fastapi-0.116.0 h11-0.16.0 idna-3.10 psycopg2-binary-2.9.10 pydantic-2.11.7 pydantic-core-2.33.2 sniffio-1.3.1 starlette-0.46.2 typing-extensions-4.14.1 typing-inspection-0.4.1 uvicorn-0.35.0
+#8 6.324 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 6.452 
+#8 6.452 [notice] A new release of pip is available: 23.0.1 -> 25.1.1
+#8 6.452 [notice] To update, run: pip install --upgrade pip
+#8 DONE 6.8s
+
+#9 [runtime 3/4] COPY --from=build /root/.local /root/.local
+#9 DONE 0.2s
+
+#10 [runtime 4/4] COPY app.py .
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers 0.1s done
+#11 writing image sha256:5c453c2373ecbcb71dfb1de7cd58affab01ba54a69023ae27242fee7fd79481e done
+#11 naming to docker.io/library/user-service:latest done
+#11 DONE 0.2s
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 422B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.10-slim
+#2 DONE 0.3s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [build 1/4] FROM docker.io/library/python:3.10-slim@sha256:9dd6774a1276178f94b0cc1fb1f0edd980825d0ea7634847af9940b1b6273c13
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 2.94kB 0.0s done
+#5 DONE 0.0s
+
+#6 [build 2/4] WORKDIR /app
+#6 CACHED
+
+#7 [build 3/4] COPY requirements.txt .
+#7 DONE 0.0s
+
+#8 [build 4/4] RUN pip install --no-cache-dir --user -r requirements.txt
+#8 1.812 Collecting fastapi
+#8 1.893   Downloading fastapi-0.116.0-py3-none-any.whl (95 kB)
+#8 1.911      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 95.6/95.6 kB 7.0 MB/s eta 0:00:00
+#8 1.987 Collecting uvicorn
+#8 2.008   Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
+#8 2.013      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 66.4/66.4 kB 108.7 MB/s eta 0:00:00
+#8 2.298 Collecting pydantic
+#8 2.318   Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
+#8 2.346      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 444.8/444.8 kB 17.9 MB/s eta 0:00:00
+#8 2.496 Collecting psycopg2-binary
+#8 2.520   Downloading psycopg2_binary-2.9.10-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.0 MB)
+#8 2.627      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.0/3.0 MB 28.9 MB/s eta 0:00:00
+#8 2.697 Collecting typing-extensions>=4.8.0
+#8 2.717   Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+#8 2.720      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 43.9/43.9 kB 258.1 MB/s eta 0:00:00
+#8 2.828 Collecting starlette<0.47.0,>=0.40.0
+#8 2.847   Downloading starlette-0.46.2-py3-none-any.whl (72 kB)
+#8 2.850      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.0/72.0 kB 179.6 MB/s eta 0:00:00
+#8 2.909 Collecting click>=7.0
+#8 2.928   Downloading click-8.2.1-py3-none-any.whl (102 kB)
+#8 2.931      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.2/102.2 kB 215.1 MB/s eta 0:00:00
+#8 2.958 Collecting h11>=0.8
+#8 2.976   Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#8 4.599 Collecting pydantic-core==2.33.2
+#8 4.611   Downloading pydantic_core-2.33.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+#8 4.714      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 20.1 MB/s eta 0:00:00
+#8 4.744 Collecting annotated-types>=0.6.0
+#8 4.754   Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+#8 4.786 Collecting typing-inspection>=0.4.0
+#8 4.809   Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+#8 4.874 Collecting anyio<5,>=3.6.2
+#8 4.888   Downloading anyio-4.9.0-py3-none-any.whl (100 kB)
+#8 4.905      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.9/100.9 kB 6.8 MB/s eta 0:00:00
+#8 4.980 Collecting exceptiongroup>=1.0.2
+#8 4.990   Downloading exceptiongroup-1.3.0-py3-none-any.whl (16 kB)
+#8 5.021 Collecting sniffio>=1.1
+#8 5.042   Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+#8 5.068 Collecting idna>=2.8
+#8 5.097   Downloading idna-3.10-py3-none-any.whl (70 kB)
+#8 5.100      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 70.4/70.4 kB 171.2 MB/s eta 0:00:00
+#8 5.209 Installing collected packages: typing-extensions, sniffio, psycopg2-binary, idna, h11, click, annotated-types, uvicorn, typing-inspection, pydantic-core, exceptiongroup, pydantic, anyio, starlette, fastapi
+#8 5.506   WARNING: The script uvicorn is installed in '/root/.local/bin' which is not on PATH.
+#8 5.506   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+#8 5.955   WARNING: The script fastapi is installed in '/root/.local/bin' which is not on PATH.
+#8 5.955   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+#8 5.962 Successfully installed annotated-types-0.7.0 anyio-4.9.0 click-8.2.1 exceptiongroup-1.3.0 fastapi-0.116.0 h11-0.16.0 idna-3.10 psycopg2-binary-2.9.10 pydantic-2.11.7 pydantic-core-2.33.2 sniffio-1.3.1 starlette-0.46.2 typing-extensions-4.14.1 typing-inspection-0.4.1 uvicorn-0.35.0
+#8 5.962 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 6.069 
+#8 6.069 [notice] A new release of pip is available: 23.0.1 -> 25.1.1
+#8 6.069 [notice] To update, run: pip install --upgrade pip
+#8 DONE 6.4s
+
+#9 [runtime 3/4] COPY --from=build /root/.local /root/.local
+#9 DONE 0.2s
+
+#10 [runtime 4/4] COPY app.py .
+#10 DONE 0.0s
+
+#11 exporting to image
+#11 exporting layers 0.1s done
+#11 writing image sha256:cac2938b6bc8173353c7343c0df8d79a74685725c52410e49974c6132d372b6f done
+#11 naming to docker.io/library/product-service:latest done
+#11 DONE 0.2s
+Aplicamanto manifiestos Kubernetes:
+secret/postgres-secret created
+deployment.apps/postgres-deployment created
+service/postgres-service created
+configmap/user-service-config created
+secret/user-service-secret created
+deployment.apps/user-service-deployment created
+service/user-service created
+configmap/product-service-config created
+secret/product-service-secret created
+deployment.apps/product-service-deployment created
+service/product-service created
+Esperando los deployments...
+deployment.apps/postgres-deployment condition met
+deployment.apps/user-service-deployment condition met
+deployment.apps/product-service-deployment condition met
+Verificando estado de los pods:
+NAME                                          READY   STATUS    RESTARTS   AGE
+postgres-deployment-777b497667-5srgd          1/1     Running   0          3s
+product-service-deployment-69d9d45db7-2wv9w   1/1     Running   0          3s
+product-service-deployment-69d9d45db7-tlf9g   1/1     Running   0          3s
+user-service-deployment-86d76f9c6b-6tlhh      1/1     Running   0          3s
+user-service-deployment-86d76f9c6b-kd7nk      1/1     Running   0          3s
+Verificando logs de servicios:
+User Service Logs
+Product Service Logs
+Configurando port-forward para acceso a servicios
+Iniciando port-forward
+Esperando a que port-forward esté listo...
+Acceso a servicios via port-forward:
+User Service: http://localhost:8000
+Product Service: http://localhost:8001
+Comandos para probar manualmente:
+curl http://localhost:8000/users/
+curl http://localhost:8001/products/
+Para parar port-forward:
+kill 11445 11446
+Deployment Terminado
