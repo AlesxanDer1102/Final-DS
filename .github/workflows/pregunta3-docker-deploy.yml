@@ -23,7 +23,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and start services
-        run: docker compose -f pregunta-3/docker-compose.yaml up --build -d
+        run: docker compose -f Docker-compose.yaml up --build -d
 
       - name: Wait for services to be ready
         run: |
@@ -45,6 +45,6 @@ jobs:
         if: always()
         run: |
           cd pregunta-3
-          docker compose -f pregunta-3/docker-compose.yaml down
-          docker compose -f pregunta-3/docker-compose.yaml down --volumes
+          docker compose -f pregunta-3/Docker-compose.yaml down
+          docker compose -f pregunta-3/Docker-compose.yaml down --volumes
           docker system prune -f
